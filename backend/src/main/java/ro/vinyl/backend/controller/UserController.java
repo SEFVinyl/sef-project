@@ -26,9 +26,9 @@ public class UserController {
     public ResponseEntity<User> get(@PathVariable Integer id){
         try{
             User user = userService.getUser(id);
-            return new ResponseEntity<User>(user, HttpStatus.OK);
+            return new ResponseEntity<>(user, HttpStatus.OK);
         } catch (NoSuchElementException e){
-            return new ResponseEntity<User>(HttpStatus.NOT_FOUND);
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
     }
 
