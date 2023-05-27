@@ -5,6 +5,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import ro.vinyl.backend.exception.EmailAlreadyExistsException;
 import ro.vinyl.backend.model.User;
 import ro.vinyl.backend.service.UserService;
 
@@ -33,8 +34,13 @@ public class UserController {
     }
 
     @PostMapping("")
-    public void add(@RequestBody User user){
-        userService.saveUser(user);
+    public ResponseEntity<?> add(@RequestBody User user){
+        try{
+            userService.saveUser(user);
+            return new ResponseEntity<>(HttpStatus.OK);
+        } catch (EmailAlreadyExistsException e){
+            return new  ResponseEntity<>(HttpStatus.FORBIDDEN);
+        }
     }
 
     @PutMapping("/{id}")
