@@ -12,6 +12,11 @@ public class GlobalExceptionHandler {
         return ResponseEntity.status(HttpStatus.CONFLICT).body(ex.getMessage());
     }
 
+    @ExceptionHandler(VinylAlreadyExistsException.class)
+    public ResponseEntity<String> handleVinylAlreadyExistsException(VinylAlreadyExistsException ex) {
+        return ResponseEntity.status(HttpStatus.CONFLICT).body(ex.getMessage());
+    }
+
     // Add additional exception handlers for other custom exceptions
 
     @ExceptionHandler(Exception.class)
